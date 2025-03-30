@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffffff; /* Light gray background */
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 350px;
+    border: 1px solid #1775bb; /* Blue border */
+    border-radius:10px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1775bb; /* Red heading */
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #1775bb; /* Blue labels */
+    font-size: 0.9rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #1775bb; /* Blue border */
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+    border-radius:5px;
+}
+
+.form-group input:focus {
+    border-color: #1775bb; /* Red on focus */
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    accent-color: #ffb606; /* Orange checkbox */
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    color: #1775bb; /* Blue label */
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #ffb606; /* Orange button */
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius:5px;
+
+}
+
+button:hover {
+    background-color: #e09b36; /* Slightly darker orange */
+}

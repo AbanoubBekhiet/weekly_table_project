@@ -1,0 +1,22 @@
+table{
+    position: relative;
+    top:30px;
+    width:80%;
+    padding:30px;
+    margin:auto;
+    border-collapse: collapse;
+    text-align: center;
+    border:solid 2px #c6dcee;
+    font-size:20px;
+    margin-bottom:100px;
+}
+
+table thead{
+    background-color:#c6dcee;
+}
+table tbody tr{
+    border-bottom:solid 2px #c6dcee;
+}
+table td,table th{
+    padding:10px;
+}

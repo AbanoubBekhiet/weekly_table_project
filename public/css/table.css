@@ -1,0 +1,225 @@
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    padding: 20px;
+    /* margin-bottom:100px; */
+}
+
+.table-content {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+/* Table Header */
+.table-content th {
+    background-color: #004080; /* Dark Blue */
+    color: white;
+    text-align: center;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #003366;
+}
+
+/* Table Cells */
+.table-content td {
+    padding: 6px;
+    border: 2px solid #003366; /* Border similar to PDF */
+    font-size: 16px;
+    font-weight: bold;
+    
+}
+
+/* Background Colors for Rows */
+.table-content tr:nth-child(even) {
+    background-color: #e6f2ff; /* Light Blue */
+}
+
+.table-content tr:nth-child(odd) {
+    background-color: #ffffff; /* White */
+}
+
+/* Hover Effect */
+.table-content tr:hover {
+    background-color: #cce0ff;
+}
+
+/* Subject Name Styling */
+.subject-name {
+    font-weight: bold;
+    background-color: #ffcc00; /* Yellow */
+    color: #333;
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Specific Column Styling */
+.table-content tr td:first-child {
+    font-weight: bold;
+    background-color: #66ccff; /* Light Blue */
+    color: #000;
+}
+
+/* Week Header Section */
+.week-header {
+    background-color: #ff6600; /* Orange */
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #cc5200;
+}
+
+
+@media print {
+    .btn-download {
+        display: none !important;
+    }
+}
+
+
+
+
+    /* General Page Styles */
+body {
+    background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
+    color: #111827; /* Tailwind's text-gray-900 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Utility Classes */
+.container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 24px;
+    margin-top:90px;
+}
+
+/* Buttons */
+.btn-download {
+    display: inline-block;
+    background-color: #3b82f6; /* Tailwind's bg-blue-500 */
+    color: #ffffff;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+    border:0px;
+    position:absolute;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.btn-download:hover {
+    background-color: #2563eb; /* Tailwind's hover:bg-blue-600 */
+}
+
+/* Card Layout */
+.card {
+    background-color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind's shadow-lg */
+}
+
+/* Header Section */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e5e7eb; /* Tailwind's border-gray-300 */
+    padding-bottom: 16px;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+.title-container {
+    text-align: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f2937; /* Tailwind's text-gray-800 */
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #6b7280; /* Tailwind's text-gray-600 */
+}
+
+/* Date Info */
+.date-container {
+    text-align: right;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6b7280;
+}
+
+.date {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #374151; /* Tailwind's text-gray-700 */
+}
+
+/* Table Styles */
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.table-content {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d1d5db; 
+}
+
+.table-header th {
+    background-color: #e5e7eb; /* Tailwind's bg-gray-200 */
+    color: #374151; /* Tailwind's text-gray-700 */
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    text-align: left;
+}
+
+.table-content td {
+    padding: 15px;
+    border: 1px solid #d1d5db;
+}
+
+.subject-name {
+    font-weight: bold;
+    background-color: #f9fafb; /* Tailwind's bg-gray-50 */
+}
+
+td {
+    word-break: break-word;
+    max-width: 150px; /* Adjust as needed */
+}
+.Assessments th{
+    background-color: #619ce5;
+    color:black;
+}

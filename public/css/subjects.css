@@ -1,0 +1,70 @@
+table{
+    position: relative;
+    top:70px;
+    width:80%;
+    padding:30px;
+    margin:auto;
+    border-collapse: collapse;
+    text-align: center;
+    border:solid 2px #c6dcee;
+    font-size:20px;
+    margin-bottom:100px;
+}
+
+table thead{
+    background-color:#c6dcee;
+}
+table tbody tr{
+    border-bottom:solid 2px #c6dcee;
+}
+table td,table th{
+    padding:10px;
+}
+
+.add_grade_button{
+    background-color:#ffb606;
+    color:#000;
+    padding:10px 20px;
+    border:0px;
+    border-radius:5px;
+    position:absolute;
+    right:20px;
+}
+.add_grade_button:hover{
+    background-color:#000;
+    color:#ffb606;
+}
+
+
+.adding_grade_form{
+    position:absolute;
+    left:50%;
+    border-radius:5px;
+    transform: translateX(-50%);
+    padding:70px;
+    top:100px;
+    background-color:#c6dcee;
+    border:#ffb606  solid 1px;
+    flex-direction:column;
+    align-items:center;
+    font-size:20px;
+    display:none;
+}
+.adding_grade_form div{
+    margin-bottom: 20px;
+}
+.adding_grade_form div input{
+    padding:10px 40px ;
+}
+
+i{
+    color:red;
+    font-size:20px;
+    position:absolute;
+    top:10px;
+    right:10px;
+}
+.adding_grade_form input[type='submit'] {
+    display: block;  
+    margin: 0 auto;  
+}
