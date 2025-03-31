@@ -8,7 +8,6 @@
     <link href="{{ asset('css/table.css') }}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js') }}"></script> 
     <script src="{{ asset('js/table.js') }}"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 </head>
 <body class="body-bg text-color">
     <div class="button-container">
@@ -45,42 +44,40 @@
         </table>
     </div>
 
-    <div class="table-container" >
-        <table class="table-content" >
-            <tbody >
-
+    <div class="table-container">
+        <table class="table-content">
+            <tbody>
                 <tr>
                     <th colspan="2" style="font-size:23px;background-color:tomato;color:white">Assessments</th>
                     @php
                         $days = ['mon', 'tue', 'wen', 'thr', 'fri'];
                     @endphp
                     @foreach ($days as $day)
-                        <th style="font-size:16px;background-color:tomato;color:white"> 
-                            @if (!empty($assignments[$day]) && $assignments[$day]->count())
-                                @foreach ($assignments[$day] as $quiz)
-                                    -{{ $quiz->assignment }}<br> 
-                                @endforeach
-                            @else
-                                No Quiz
-                            @endif
-                        </th>
-                    @endforeach
+                    <th style="font-size:16px;background-color:tomato;color:white"> 
+                        @if (!empty($assignments[$day]) && $assignments[$day]->count())
+                            @foreach ($assignments[$day] as $quiz)
+                                -{{ $quiz->assignment }}<br> <!-- Display each quiz on a new line -->
+                            @endforeach
+                        @else
+                            No Quiz
+                        @endif
+                    </th>
+                @endforeach
                 </tr>
                 <tr style="font-size:23px">
                     <th rowspan="2">Subject</th>
                     <th rowspan="2">Type</th>
                     <th colspan="5">Days</th>
                 </tr>
-                <tr  style="font-size:23px">
+                <tr style="font-size:23px">
                     <th>Monday</th>
                     <th>Tuesday</th>
                     <th>Wednesday</th>
                     <th>Thursday</th>
                     <th>Friday</th>
                 </tr>
-            @foreach ($tableOfContent as $subjectName => $subjectData)
+                @foreach ($tableOfContent as $subjectName => $subjectData)
                 @foreach ($subjectData as $data)
-                
                     <tr>
                         <td style="font-size:23px" rowspan="5" class="subject-name">{{ wordwrap($subjectName, 20, "\n", true) }}</td>
                         <td style="background-color:#007bff;color:white;font-size:23px">Lessons/Topics</td>
@@ -126,6 +123,7 @@
                 @else
                 <tr></tr>
                 @endif
+
                     @php
                     $remove_notes = ($data->monday_notes == null
                         && $data->tuesday_notes == null
@@ -134,7 +132,7 @@
                         && $data->friday_notes == null);
                     @endphp
                 
-                @if (!$remove_notes)  
+                @if (!$remove_notes)  {{-- Only display if notes exist --}}
                 <tr style="color:tomato">
                     <td style="font-size:23px">Notes</td>
                     <td>{{ wordwrap($data->monday_notes ?? '', 20, "\n", true) }}</td>
@@ -146,16 +144,161 @@
                 @else
                 <tr></tr>
                 @endif
-
-                @endforeach
-                @endforeach
                 
-                
+                @endforeach
+            @endforeach
+            
             </tbody>
         </table>
     </div>
-    <script>
-        new Sortable(document.getElementById('sortable'), { animation: 150 });
-    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* General Styles */
+.body-bg {
+    background-color: #f4f4f9;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.text-color {
+    color: #333;
+}
+
+/* Button Styles */
+.btn-download {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #0056b3;
+}
+
+/* Container Card */
+.container.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+}
+
+/* Header Section */
+.header-section {
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-container .logo {
+    width: 400px;
+}
+
+.title-container {
+    text-align: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+}
+
+.date-container {
+    text-align: right;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.highlight {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+    margin-bottom:100px;
+}
+
+.table-content {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.table-content th, .table-content td {
+    border: 1px solid #ccc;
+    padding: 3px;
+    text-align: center;
+}
+
+.table-content th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.table-content tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.subject-name {
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .date-container {
+        text-align: center;
+    }
+}
+@media print{
+  .btn-download{
+    display:none !important;
+  }
+  
+}
+
+
+
+

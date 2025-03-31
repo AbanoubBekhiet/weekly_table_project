@@ -65,6 +65,12 @@ Route::post("admin_dashboard/see_all_weeks/admin_all_tables/table_of_content/{we
 
 
 
+Route::get("teacher_dashboard/teacher_alter_week_content",[weekController::class,"teacher_alter_week_content"])->name("teacher_alter_week_content");
+Route::post("teacher_dashboard/teacher_alter_week_content/weeks_by_year",[weekController::class,"weeks_by_year"])->name("weeks_by_year");
+Route::post("teacher_dashboard/teacher_alter_week_content/filter_created_schedule_content",[weekController::class,"filter_created_schedule_content"])->name("filter_created_schedule_content");
+
+Route::post("/teacher_dashboard/teacher_alter_week_content/get_subject_content",[weekController::class,"getSubjectContent"])->name("getSubjectContent");
+Route::post("/teacher_dashboard/teacher_alter_week_content/teacher_update_week_content/{week_id}/{subject_id}/{grade_id}",[weekController::class,"teacher_update_week_content"])->name("teacher_update_week_content");
 
 
 

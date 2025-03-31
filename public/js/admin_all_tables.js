@@ -49,6 +49,8 @@ $(document).ready(function () {
                         `;
                         $(".grades").append(formHtml);
                     });
+
+                    
                 },
                 error: function (xhr) {
                     console.log("Error fetching grades:", xhr.responseText);

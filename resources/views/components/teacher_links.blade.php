@@ -1,5 +1,6 @@
 <ul class="links">
     <li><a href="{{ route('add_week_content') }}">Add week content</a></li>
+    <li><a href="{{ route('teacher_alter_week_content') }}">update week content</a></li>
     <li><a href="{{ route('home') }}"> Home</a></li>
 </ul>
 

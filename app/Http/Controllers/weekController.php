@@ -11,8 +11,7 @@ use App\Models\Week;
 use App\Models\Grade;
 use App\Models\Assignment;
 use App\Models\DailySchedule;
-
-
+use Illuminate\Console\Scheduling\ScheduleWorkCommand;
 
 class weekController extends Controller
 {
@@ -80,7 +79,6 @@ class weekController extends Controller
 
     public function filter_weeks_by_grade(Request $request){
 
-
         $subjects = DB::table("grade_subject")
         ->join("subjects", "grade_subject.subject_id", "=", "subjects.id")
         ->join("teacher_subject", function ($join) use ($request) {
@@ -91,9 +89,9 @@ class weekController extends Controller
         ->select("subjects.id as subject_id", "subjects.name as subject_name")
         ->distinct()
         ->get();
-    
 
     return response()->json(compact("subjects"));
+    // return $subjects;
     }
 
 
@@ -130,7 +128,7 @@ class weekController extends Controller
             "assignment" => "string|nullable",
             "day" => "string|nullable",
         ]);
-
+// dd($request);
         DailySchedule::create([
             "week_id" => $request->week,
             "grade_id" => $request->grade,
@@ -234,7 +232,7 @@ class weekController extends Controller
         }
         $grade_id = (int) $grade_id;
         // Return data to the Blade view
-// dd($assignments);
+// dd($tableOfContent);
     
         return view('table', compact('week', 'tableOfContent','gradeName','grade_id','assignments'));
     }
@@ -242,6 +240,96 @@ class weekController extends Controller
 
 
 
+
+
+
+
+    public function filter_created_schedule_content(Request $request){
+
+        $subjects =DB::table("subjects")
+        ->join("daily_schedules","subjects.id","daily_schedules.subject_id")
+        ->where("daily_schedules.week_id",$request->week)
+        ->where("daily_schedules.grade_id",$request->grade)
+        ->get();
+    return response()->json(compact("subjects"));
+    // return $subjects;
+    }
+
+
+
+
+
+        public function getSubjectContent(Request $request)
+        {
+            $subject = DB::table('daily_schedules')
+                ->where('subject_id', $request->subject_id)
+                ->where('week_id', $request->week_id)
+                ->where('grade_id', $request->grade_id)
+                ->first();
+
+            // return response()->json(['subjects' => $subject]);
+            return $subject;
+        }
+
+
+
+
+    public function teacher_alter_week_content(){
+        $years=Week::select("year")->distinct()->get();
+        return view("teacher_alter_week_content",compact("years"));
+    }
+
+    public function teacher_update_week_content(Request $request){
+        $data=$request->validate([
+            "week" => "integer|required",
+            "grade" => "integer|required",
+            "subject" => "integer|required",
+            "monday_lesson" => "string|nullable",
+            "monday_books_pages" => "string|nullable",
+            "monday_homework" => "string|nullable",
+            "monday_hw_due_date" => "date|nullable",
+            "monday_notes" => "string|nullable",
+            "tuesday_lesson" => "string|nullable",
+            "tuesday_books_pages" => "string|nullable",
+            "tuesday_homework" => "string|nullable",
+            "tuesday_hw_due_date" => "date|nullable",
+            "tuesday_notes" => "string|nullable",
+            "wednesday_lesson" => "string|nullable",
+            "wednesday_books_pages" => "string|nullable",
+            "wednesday_homework" => "string|nullable",
+            "wednesday_hw_due_date" => "date|nullable",
+            "wednesday_notes" => "string|nullable",
+            "thursday_lesson" => "string|nullable",
+            "thursday_books_pages" => "string|nullable",
+            "thursday_homework" => "string|nullable",
+            "thursday_hw_due_date" => "date|nullable",
+            "thursday_notes" => "string|nullable",
+            "friday_lesson" => "string|nullable",
+            "friday_books_pages" => "string|nullable",
+            "friday_homework" => "string|nullable",
+            "friday_hw_due_date" => "date|nullable",
+            "friday_notes" => "string|nullable",
+            "assignment" => "string|nullable",
+            "day" => "string|nullable",
+        ]);
+
+        $schedule = DailySchedule::where("week_id", $request->week)
+        ->where("grade_id", $request->grade)
+        ->where("subject_id", $request->subject)
+        ->first();
+
+    if (!$schedule) {
+        return redirect()->back()->with("error", "Schedule not found.");
+    }
+
+    $schedule->update($data);
+
+
+        return to_route("teacher_dashboard")->with("message","daily schedule subject has been updated");
+    }
+
+
+    
 
     
 }

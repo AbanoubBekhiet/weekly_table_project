@@ -73,8 +73,9 @@ i{
     z-index:2;
 }
 .subjects_container{
+    width:60%;
     display:flex;
-    
+    flex-wrap:wrap;    
 }
 .subjects_container .form-group{
     margin:10px;

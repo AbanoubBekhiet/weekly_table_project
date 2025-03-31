@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-   <link href="{{ asset('css/add_week_content.css') }}" rel="stylesheet"></link>
+   <link href="{{ asset('css/teacher_alter_week_content.css') }}" rel="stylesheet"></link>
    <link href="{{ asset('css/normalize.css') }}" rel="stylesheet"></link>
    <script src="{{ asset('js/jquery.js') }}"></script> 
-   <script src="{{ asset('js/add_week_content.js') }}"></script> 
+   <script src="{{ asset('js/teacher_alter_week_content.js') }}"></script> 
 </head>
 <body>
     @component('components.header-component')@endcomponent
     @component('components.teacher_links')@endcomponent
 
-
-
-
-
     <div class="container">
-        <form id="form_of_data" method="post" action="{{route("create_week_grade_subject_part")}}">
-            <h2>Weekly Lesson Plan</h2>
+        <form id="form_of_data" method="post" action="">
+            <h2>update weekly plan</h2>
                 <div class="form-group">
                     <label for="year">Year</label>
                     <select id="year" name="year">
@@ -52,18 +48,6 @@
                     </select>
                 </div>
 
-                <div class="form-group hide">
-                    <label for="assignment">Add Assessment</label>
-                    <input type="text" name="assignment" id="assignment">
-                    <label for="day">Select the day</label>
-                    <select name="day"  id="day" syle="margin-top:20px;">
-                        <option value="mon">Monday</option>
-                        <option value="tue">Tuesday</option>
-                        <option value="wen">Wednesday</option>
-                        <option value="thr">Thursday</option>
-                        <option value="fri">Friday</option>                        
-                    </select>
-                </div>
 
                 @csrf
                 <table id="table_of_content" class="hide">
