@@ -41,6 +41,7 @@ $(function () {
     // When the user selects a grade, fetch subjects
     $("#grade").on("change", function () {
         let selectedGrade = $(this).val();
+        let weekSelect = $("#week").val();
 
         if (!selectedGrade) return; // Exit if no grade is selected
 
@@ -51,7 +52,7 @@ $(function () {
             headers: {
                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
             },
-            data: JSON.stringify({  grade: selectedGrade }),
+            data: JSON.stringify({  grade: selectedGrade,week:weekSelect }),
             success: function (response) {
                 console.log("Subjects Loaded:", response);
 

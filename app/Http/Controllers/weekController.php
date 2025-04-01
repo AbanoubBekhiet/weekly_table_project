@@ -79,7 +79,20 @@ class weekController extends Controller
 
     public function filter_weeks_by_grade(Request $request){
 
-        $subjects = DB::table("grade_subject")
+        // $subjects = DB::table("grade_subject")
+        // ->join("subjects", "grade_subject.subject_id", "=", "subjects.id")
+        // ->join("teacher_subject", function ($join) use ($request) {
+        //     $join->on("teacher_subject.subject_id", "=", "grade_subject.subject_id")
+        //          ->where("teacher_subject.teacher_id", Auth::id());
+        // })
+        // ->where("grade_subject.grade_id", $request->grade)
+        // ->select("subjects.id as subject_id", "subjects.name as subject_name")
+        // ->distinct()
+        // ->get();
+
+
+
+        $subjects_not_checked = DB::table("grade_subject")
         ->join("subjects", "grade_subject.subject_id", "=", "subjects.id")
         ->join("teacher_subject", function ($join) use ($request) {
             $join->on("teacher_subject.subject_id", "=", "grade_subject.subject_id")
@@ -90,8 +103,25 @@ class weekController extends Controller
         ->distinct()
         ->get();
 
+
+
+        $existingSubjects = DailySchedule::where("week_id", $request->week)
+        ->where("grade_id", $request->grade)
+        ->pluck("subject_id") 
+        ->toArray();
+    
+    $subjects = collect($subjects_not_checked)->reject(function ($sub) use ($existingSubjects) {
+        return in_array($sub->subject_id, $existingSubjects); 
+    });
+    
+
+
+
     return response()->json(compact("subjects"));
     }
+
+
+
 
 
     public function create_week_grade_subject_part(Request $request){

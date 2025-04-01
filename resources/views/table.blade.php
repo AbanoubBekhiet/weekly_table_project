@@ -7,8 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/table.css') }}" rel="stylesheet">
     <script src="{{ asset('js/jquery.js') }}"></script> 
+    <script src="{{ asset('js/Sortable.min.js') }}"></script> 
     <script src="{{ asset('js/table.js') }}"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script> --}}
 </head>
 <body class="body-bg text-color">
 
@@ -62,8 +63,8 @@
     </div>
 
     <div class="table-container" >
-        <table class="table-content" >
-            <tbody >
+        <table class="table-content" id="table-content">
+            <tbody>
 
                 <tr>
                     <th colspan="2" style="font-size:23px;background-color:tomato;color:white">Assessments</th>
@@ -95,6 +96,8 @@
                     <th>Friday</th>
                 </tr>
             @foreach ($tableOfContent as $subjectName => $subjectData)
+            <tbody class="subject-group">
+
                 @foreach ($subjectData as $data)
                 
                     <tr>
@@ -164,6 +167,8 @@
                 @endif
 
                 @endforeach
+            </tbody>
+
                 @endforeach
                 
                 
@@ -171,7 +176,15 @@
         </table>
     </div>
     <script>
-        new Sortable(document.getElementById('sortable'), { animation: 150 });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            new Sortable(document.querySelector("#table-content"), {
+                animation: 150,
+                handle: ".subject-name", // Drag handle (only subject column)
+                ghostClass: "sortable-ghost", // Add a class for visual feedback
+                group: "subjects", // Ensures subjects move as a unit
+            });
+        });
     </script>
 </body>
 </html>
