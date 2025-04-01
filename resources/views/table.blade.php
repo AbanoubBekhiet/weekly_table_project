@@ -9,7 +9,6 @@
     <script src="{{ asset('js/jquery.js') }}"></script> 
     <script src="{{ asset('js/Sortable.min.js') }}"></script> 
     <script src="{{ asset('js/table.js') }}"></script> 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script> --}}
 </head>
 <body class="body-bg text-color">
 
@@ -24,7 +23,6 @@
 @endif
 @if (session('message'))
     <div class="success-message">
-        <p class="success-title">Success!</p>
         <p class="success-text">{{ session('message') }}</p>
     </div>
 @endif
