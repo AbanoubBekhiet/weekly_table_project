@@ -20,6 +20,12 @@
         </ul>
     </div>
 @endif
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
     <form class="adding_grade_form" action="{{ route("add_grade") }}" method="post">
         @csrf
         <i class="fa-regular fa-circle-xmark exit" ></i>

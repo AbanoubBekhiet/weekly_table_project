@@ -21,6 +21,12 @@
         </ul>
     </div>
 @endif
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
     <div class="button-container">
         <button class="btn-download">Print PDF</button>
     </div>

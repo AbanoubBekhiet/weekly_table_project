@@ -13,13 +13,19 @@
 <body>
     @component('components.header-component')@endcomponent
     @component('components.teacher_links')@endcomponent
-    @if ($errors->any())
+@if ($errors->any())
     <div class="error-message">
         <ul class="error-list">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
+    </div>
+@endif
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
     </div>
 @endif
     <div class="container">

@@ -18,6 +18,12 @@
         </ul>
     </div>
 @endif
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
     @endcomponent
     <div class="image_section">
         <img src="{{ asset('images/group-kids-studying-school.jpg') }}" 

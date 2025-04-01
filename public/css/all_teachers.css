@@ -41,3 +41,23 @@ table td,table th{
     font-size: 20px;
     line-height: 1.5;
 }
+.success-message {
+    background-color: #e6f9e6;
+    border-left: 4px solid #2ecc71;
+    color: #27ae60;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.success-text {
+    font-size: 14px;
+    line-height: 1.5;
+}

@@ -257,7 +257,7 @@ class weekController extends Controller
                 ->where('grade_id', $request->grade_id)
                 ->first();
 
-            return response()->json(['subjects' => $subject]);
+            return $subject;
         }
 
 

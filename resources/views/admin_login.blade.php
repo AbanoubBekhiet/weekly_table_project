@@ -18,6 +18,12 @@
         </ul>
     </div>
 @endif
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
     <div class="login-container">
         <h2>Admin login</h2>
         <form action="{{ route('admin_login_back') }}" method="POST">

@@ -73,8 +73,6 @@ $(function () {
     });
 
 
-    let subjectSelect = $("#subject");
-    $(document).ready(function () {
         let subjectSelect = $("#subject");
     
         subjectSelect.on("change", function () {
@@ -89,7 +87,7 @@ $(function () {
             if (!selectedSubjectId || !selectedWeek || !selectedGrade) return;
     
             $.ajax({
-                url: "/teacher_dashboard/teacher_alter_week_content/get_subject_content", // Adjust URL as needed
+                url: "/teacher_dashboard/teacher_alter_week_content/get_subject_content", 
                 method: "POST",
                 contentType: "application/json",
                 headers: {
@@ -124,7 +122,6 @@ $(function () {
                 },
             });
         });
-    });
     
 
     

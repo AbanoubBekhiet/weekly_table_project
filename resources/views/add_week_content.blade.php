@@ -24,7 +24,12 @@
         </ul>
     </div>
 @endif
-
+@if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
 
     <div class="container">
         <form id="form_of_data" method="post" action="{{route("create_week_grade_subject_part")}}">

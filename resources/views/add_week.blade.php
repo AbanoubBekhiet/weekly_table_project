@@ -21,7 +21,12 @@
             </ul>
         </div>
     @endif
-
+    @if (session('message'))
+    <div class="success-message">
+        <p class="success-title">Success!</p>
+        <p class="success-text">{{ session('message') }}</p>
+    </div>
+@endif
 <div class="form-container">
     <h2>Add Week</h2>
     <form id="teacherForm" action="{{ route('add_week') }}" method="POST">
