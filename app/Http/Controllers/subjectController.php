@@ -14,10 +14,6 @@ class subjectController extends Controller
     public function add_subject(Request $request){
         $validated_data=$request->validate([
             "name"=>"required|unique:subjects,name|string",
-        ],
-        [
-            "name.required"=>"يجب إدخال المادة الدراسية",
-            "name.unique"=>"المادة الدراسية موجودة بالفعل",
         ]);
 
 
@@ -25,6 +21,6 @@ class subjectController extends Controller
             "name"=>$request->name
         ]);
 
-        return redirect()->back()->with("message","تم إضافة  المادة الدراسية بنجاح");
+        return redirect()->back()->with("message","subject was added successfully");
     }
 }

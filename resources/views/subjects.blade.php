@@ -11,6 +11,16 @@
    <script src="{{ asset('js/subjects.js') }}"></script> 
 </head>
 <body>
+
+    @if ($errors->any())
+    <div class="error-message">
+        <ul class="error-list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form class="adding_grade_form" action="{{ route("add_subject") }}" method="post">
         @csrf
         <i class="fa-regular fa-circle-xmark exit" ></i>

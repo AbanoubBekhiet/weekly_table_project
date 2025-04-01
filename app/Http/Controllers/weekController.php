@@ -43,7 +43,7 @@ class weekController extends Controller
 
     Week::create($data);
 
-    return back()->with("message", "تم إضافة الاسبوع بنجاح");
+    return back()->with("message", "week was added successfully");
 
     }
 
@@ -91,7 +91,6 @@ class weekController extends Controller
         ->get();
 
     return response()->json(compact("subjects"));
-    // return $subjects;
     }
 
 
@@ -128,7 +127,6 @@ class weekController extends Controller
             "assignment" => "string|nullable",
             "day" => "string|nullable",
         ]);
-// dd($request);
         DailySchedule::create([
             "week_id" => $request->week,
             "grade_id" => $request->grade,
@@ -168,7 +166,7 @@ class weekController extends Controller
             "day" => $request->day,
         ]);
 
-        return back()->with("message","تم إضافة المحتوي بنجاح");
+        return back()->with("message"," content was added successfully");
     }
 
 
@@ -196,23 +194,19 @@ class weekController extends Controller
 
     public function table_of_content($week_id, $grade_id)
     {
-        // Fetch week details
         $week = DB::table('weeks')->where('id', $week_id)->first();
         $gradeName = DB::table('grades')->where('id', $grade_id)->value('name');
         $assignments=Assignment::get()->where("grade_id",$grade_id)
         ->where("week_id",$week_id)->groupBy("day");
-        // Fetch subjects for the given grade
         $subjects = DB::table('grade_subject')
             ->join('subjects', 'grade_subject.subject_id', '=', 'subjects.id')
             ->where('grade_subject.grade_id', $grade_id)
             ->select('subjects.id as subject_id', 'subjects.name as subject_name')
             ->get();
     
-        // Prepare an associative array to hold the table of content
         $tableOfContent = [];
     
         foreach ($subjects as $subject) {
-            // Get schedule data for the current subject in the selected week
             $scheduleData = DB::table('daily_schedules')
                 ->where('week_id', $week_id)
                 ->where('grade_id', $grade_id)
@@ -227,12 +221,9 @@ class weekController extends Controller
                 ->get()
                 ->toArray();
     
-            // Assign schedule data to the subject name as the key
             $tableOfContent[$subject->subject_name] = $scheduleData;
         }
         $grade_id = (int) $grade_id;
-        // Return data to the Blade view
-// dd($tableOfContent);
     
         return view('table', compact('week', 'tableOfContent','gradeName','grade_id','assignments'));
     }
@@ -252,7 +243,6 @@ class weekController extends Controller
         ->where("daily_schedules.grade_id",$request->grade)
         ->get();
     return response()->json(compact("subjects"));
-    // return $subjects;
     }
 
 
@@ -267,8 +257,7 @@ class weekController extends Controller
                 ->where('grade_id', $request->grade_id)
                 ->first();
 
-            // return response()->json(['subjects' => $subject]);
-            return $subject;
+            return response()->json(['subjects' => $subject]);
         }
 
 

@@ -38,10 +38,6 @@ class gradeController extends Controller
     public function add_grade(Request $request){
         $validated_data=$request->validate([
             "name"=>"required|unique:grades,name|string",
-        ],
-        [
-            "name.required"=>"يجب إدخال السنة الدراسية",
-            "name.unique"=>"السنة الدراسية موجودة بالفعل",
         ]);
 
         $grade=Grade::create([
@@ -58,6 +54,6 @@ class gradeController extends Controller
 
 
 
-        return redirect()->back()->with("message","تم إضافة السنة الدراسية بنجاح");
+        return redirect()->back()->with("message","grade was added successfully");
     }
 }

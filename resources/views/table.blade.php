@@ -11,6 +11,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 </head>
 <body class="body-bg text-color">
+
+    @if ($errors->any())
+    <div class="error-message">
+        <ul class="error-list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="button-container">
         <button class="btn-download">Print PDF</button>
     </div>

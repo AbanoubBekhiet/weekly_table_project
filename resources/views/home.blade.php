@@ -9,7 +9,15 @@
 </head>
 <body>
     @component('components.header-component')
-    
+    @if ($errors->any())
+    <div class="error-message">
+        <ul class="error-list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     @endcomponent
     <div class="image_section">
         <img src="{{ asset('images/group-kids-studying-school.jpg') }}" 

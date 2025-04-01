@@ -13,7 +13,15 @@
 <body>
     @component('components.header-component')@endcomponent
     @component('components.teacher_links')@endcomponent
-
+    @if ($errors->any())
+    <div class="error-message">
+        <ul class="error-list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="container">
         <form id="form_of_data" method="post" action="">
             <h2>update weekly plan</h2>

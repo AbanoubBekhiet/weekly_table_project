@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Admin;
 use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\teacherGrade;
@@ -28,9 +27,6 @@ class mainController extends Controller
         $validated_data = $request->validate([
             "email" => "required|email",
             "password" => "required|string",
-        ], [
-            "email.required" => "يجب إدخال البريد الإلكتروني",
-            "password.required" => "يجب إدخال الرقم السري"
         ]);
     
         $remember = $request->has('remember');
@@ -38,12 +34,12 @@ class mainController extends Controller
         if (Auth::guard('admins')->attempt($validated_data, $remember)) {
             $request->session()->regenerate();   
             Auth::guard('web')->logout();
-            return to_route('admin_dashboard')->with('message', 'تم تسجيل الدخول بنجاح');
+            return to_route('admin_dashboard')->with('message', 'you are logged in successfully');
         }
     
         return redirect()->back()
             ->withInput($request->only('email'))
-            ->with('message', 'خطأ في البريد الإلكتروني أو كلمة المرور');
+            ->with('message', 'wrong email or password');
     }
 
 
@@ -55,21 +51,18 @@ class mainController extends Controller
         $validated_data = $request->validate([
             "email" => "required|email",
             "password" => "required|string",
-        ], [
-            "email.required" => "يجب إدخال البريد الإلكتروني",
-            "password.required" => "يجب إدخال الرقم السري"
         ]);
     
         $remember = $request->has('remember');
     
         if (Auth::attempt($validated_data, $remember)) {
             $request->session()->regenerate();
-            return to_route('teacher_dashboard')->with('message', 'تم تسجيل الدخول بنجاح');
+            return to_route('teacher_dashboard')->with('message', 'you are logged in successfully');
         }
     
         return redirect()->back()
             ->withInput($request->email)
-            ->with('message', 'خطأ في البريد الإلكتروني أو كلمة المرور');
+            ->with('message', 'wrong email or password');
     
             
        }
@@ -94,11 +87,6 @@ class mainController extends Controller
             "email" => "required|email|unique:users,email",
             "password" => "required|string",
             "name" => "required|string",
-        ], [
-            "email.required" => "يجب إدخال البريد الإلكتروني",
-            "email.unique" => "البريد الإلكتروني مستخدم بالفعل",
-            "password.required" => "يجب إدخال الرقم السري",
-            "name.required" => "يجب اسم المستخدم",
         ]);
         $user=User::create([
             "name"=>$request->name,
@@ -118,7 +106,7 @@ class mainController extends Controller
                 "teacher_id"=>$user->id,
             ]);
         }
-            return to_route("create_teacher_account")->with("message","تم إضافة المستخدم بنجاح");
+            return to_route("create_teacher_account")->with("message","teacher was added successfully");
 
     }
 
@@ -127,7 +115,7 @@ class mainController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return to_route("home")->with('message', 'تم تسجيل الخروج بنجاح');
+        return to_route("home")->with('message', 'you logged out successfully');
     }
 
     public function teacher_logout(Request $request){
@@ -135,7 +123,7 @@ class mainController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return to_route("home")->with('message', 'تم تسجيل الخروج بنجاح');
+        return to_route("home")->with('message', 'you logged out successfully');
 
     }
 

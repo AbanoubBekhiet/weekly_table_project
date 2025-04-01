@@ -9,7 +9,15 @@
 <body>
     @component('components.header-component')
     @endcomponent
-
+    @if ($errors->any())
+    <div class="error-message">
+        <ul class="error-list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="login-container">
         <h2>Teacher login</h2>
         <form action="{{ route('teacher_login_back') }}" method="POST">
