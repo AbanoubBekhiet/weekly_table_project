@@ -10,13 +10,19 @@ body {
 
 /* Form Container */
 .form-container {
+    position: relative;
     background: white;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin:auto;
-    width:300px;
+    max-width:600px;
+}
+.form-container form{
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
 }
 
 /* Form Header */
@@ -119,4 +125,24 @@ h3{
 .success-text {
     font-size: 14px;
     line-height: 1.5;
+}
+
+
+
+
+#file_form{
+    padding:10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#0cbd9c;
+    margin-bottom:30px;
+    border-block:1px solid #ffb606;
+}
+#file_form input{
+    margin-bottom:20px;
+}
+#file_form h3{
+    background-color:#0cbd9c;
 }

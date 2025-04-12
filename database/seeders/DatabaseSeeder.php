@@ -27,10 +27,15 @@ class DatabaseSeeder extends Seeder
         //     "password_not_hashed"=>123456,
         //     "email"=>"abanoub@gmail.com",
         // ]);
+        // Admin::create([
+        //     "name"=>"abanoub",
+        //     "password"=>Hash::make("123456"),
+        //     "email"=>"abanoub@gmail.com",
+        // ]);
         Admin::create([
-            "name"=>"abanoub",
-            "password"=>Hash::make("123456"),
-            "email"=>"abanoub@gmail.com",
+            "name"=>"royal",
+            "password"=>Hash::make("royal@9312"),
+            "email"=>"royal@123",
         ]);
     }
 }

@@ -19,13 +19,35 @@
         </ul>
     </div>
 @endif
+@if(session('importErrors'))
+    <div style="background-color: #fdd; padding: 10px; margin-bottom: 15px;">
+        <h4>Import Errors:</h4>
+        <ul>
+            @foreach(session('importErrors') as $failure)
+                <li>
+                    <strong>Row {{ $failure->row() }}:</strong>
+                    Field <code>{{ $failure->attribute() }}</code>
+                    - {{ implode(', ', $failure->errors()) }}
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @if (session('message'))
     <div class="success-message">
         <p class="success-text">{{ session('message') }}</p>
     </div>
 @endif
+    <form  id="file_form" action="{{ route('import_teachers') }}" enctype="multipart/form-data" method="post">
+        @csrf
+        <h3>Import teachers form excel sheet</h3>
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Import Teachers" id="submit_file">
+    </form>
     <div class="form-container">
         <h2>Add Teacher</h2>
+
         <form id="teacherForm" action="{{ route('create_teacher_account_back') }}" method="POST">
             @csrf
             <div class="form-group mid">

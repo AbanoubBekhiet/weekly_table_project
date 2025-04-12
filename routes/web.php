@@ -33,6 +33,9 @@ use App\Http\Middleware\isTeacher;
         Route::post("admin_dashboard/see_all_weeks/admin_all_tables/filter_tables_by_years", [WeekController::class, "filter_tables_by_years"])->name("filter_tables_by_years");
         Route::post("admin_dashboard/see_all_weeks/admin_all_tables/filter_tables_by_weeks", [WeekController::class, "filter_tables_by_weeks"])->name("filter_tables_by_weeks");
         Route::post("admin_dashboard/see_all_weeks/admin_all_tables/table_of_content/{week_id}/{grade_id}", [WeekController::class, "table_of_content"])->name("table_of_content");
+        Route::post("admin_dashboard/create_teacher_account/import_teachers",[mainController::class,"import_teachers"])->name("import_teachers");
+        Route::post("admin_dashboard/update_teacher/{id}",[mainController::class,"update_teacher"])->name("update_teacher");
+        Route::post("admin_dashboard/delete_teacher/{id}",[mainController::class,"delete_teacher"])->name("delete_teacher");
     });
     Route::middleware(isTeacher::class)->group(function(){
         Route::post('/teacher_logout', [mainController::class,"teacher_logout"])->name("teacher_logout");

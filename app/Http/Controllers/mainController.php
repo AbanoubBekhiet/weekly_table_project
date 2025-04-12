@@ -8,9 +8,12 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\teacherGrade;
 use App\Models\teacherSubject;
+use App\Imports\TeacherImport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class mainController extends Controller
 {
@@ -61,7 +64,6 @@ class mainController extends Controller
         }
     
         return redirect()->back()
-            ->withInput($request->email)
             ->with('message', 'wrong email or password');
     
             
@@ -145,7 +147,8 @@ class mainController extends Controller
     ->groupBy("users.id", "users.name", "users.email", "users.password_not_hashed")
     ->get();
 
-    
+    $subjects=Subject::all();
+    $grades=Grade::all();
 
         foreach ($teachers as $teacher) {
             $teacher->grades = $teacher->grades ? explode(",", $teacher->grades) : [];
@@ -154,7 +157,7 @@ class mainController extends Controller
 
        
 
-        return view("all_teachers",compact("teachers"));
+        return view("all_teachers",compact(["teachers","subjects","grades"]));
     }
     
 
@@ -163,4 +166,86 @@ class mainController extends Controller
     public function teacher_dashboard(){
         return view("teacher_dashboard");
     }
+
+    public function import_teachers(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+
+        try {
+            Excel::import(new TeacherImport, $request->file('file'));
+            return back()->with('message', 'Teachers imported successfully.');
+        } catch (ValidationException $e) {
+            $failures = $e->failures();
+            return back()->with([
+                'importErrors' => $failures
+            ]);
+        }
+
+    }
+
+    public function update_teacher(Request $request,$id){
+
+        $teacherId = $id;
+
+        $request->validate([
+            'subjects' => [
+                'array',
+                function($attribute, $value, $fail) use ($teacherId) {
+                    foreach ($value as $subjectId) {
+                        $exists = DB::table('teacher_subject')->where('teacher_id', $teacherId)->where('subject_id', $subjectId)->exists();
+                        if ($exists) {
+                            $fail("The teacher has this subject already ");
+                        }
+                    }
+                }
+            ],
+            'grades' => [
+                'array',
+                function($attribute, $value, $fail) use ($teacherId) {
+                    foreach ($value as $gradeId) {
+                        $exists = DB::table('teacher_grade')->where('teacher_id', $teacherId)->where('grade_id', $gradeId)->exists();
+                        if ($exists) {
+                            $fail("The teacher has this grade already ");
+                        }
+                    }
+                }
+            ],
+        ]);
+        $user=User::find($id);
+
+        if($request->subjects){
+            foreach($request->subjects as $sub){
+                teacherSubject::create([
+                    "subject_id"=>$sub,
+                    "teacher_id"=>$user->id,
+                ]);  
+            }
+        }
+
+        if($request->grades){
+            foreach($request->grades as $grade){
+                teacherGrade::create([
+                    "grade_id"=>$grade,
+                    "teacher_id"=>$user->id,
+                ]);
+            }
+        }
+        
+        return redirect()->back()->with('message', 'Teacher updated successfully.');
+
+    }
+
+
+
+    public function delete_teacher($id){
+
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->back()->with('message', 'Teacher deleted successfully.');
+
+    }
+    
 }
