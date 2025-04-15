@@ -44,18 +44,27 @@ p{
 .header{
     background-color:#ffffff;
     /* width:100%; */
-    height:80px;
+    /* height:80px; */
     padding:20px;
     display:flex;
     align-items: center;
     justify-content: space-around;
-    /* margin-top:10px; */
     border-bottom:1px solid #ffb606;
     padding-top:10px;
+    flex-wrap:wrap;
+    padding-bottom:20px;
 
 }
+
 .header img{
-    width:25%;
+    width:30%;
+}
+
+@media(max-width:500px){
+        .header img{
+        width:35%;
+        margin-bottom:30px;
+    }
 }
 .header span ,.buttons button{
     padding:10px 20px;
